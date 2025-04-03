@@ -74,9 +74,7 @@ history = []
 def index():
     return render_template('index.html')
 
-
 import re
-
 import markdown
 
 @app.route('/chat', methods=['POST'])
@@ -102,5 +100,8 @@ def chat():
 
     return jsonify({"response": formatted_response})
 
+# This is required for Vercel
 if __name__ == "__main__":
     app.run(debug=True)
+else:
+    app = app
