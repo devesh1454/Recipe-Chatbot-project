@@ -79,26 +79,29 @@ import markdown
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    user_input = request.json.get('message')
-    if not user_input:
-        return jsonify({"error": "No input provided"}), 400
+    try:
+        user_input = request.json.get('message')
+        if not user_input:
+            return jsonify({"error": "No input provided"}), 400
 
-    chat_session = model.start_chat(history=history)
-    response = chat_session.send_message(user_input)
+        # Set a timeout for the Gemini API call
+        chat_session = model.start_chat(history=history)
+        response = chat_session.send_message(user_input, timeout=30)  # 30 second timeout
 
-    model_response = response.text
+        model_response = response.text
+        model_response = model_response.replace('* ', '\n')
 
-    model_response = model_response.replace('* ', '\n')
+        # Convert the response to Markdown format
+        formatted_response = markdown.markdown(model_response)
+        formatted_response = formatted_response.replace('*', '')
 
-    # Convert the response to Markdown format
-    formatted_response = markdown.markdown(model_response)
-    formatted_response = formatted_response.replace('*', '')
-    print(formatted_response)
+        history.append({"role": "user", "parts": [user_input]})
+        history.append({"role": "model", "parts": [formatted_response]})
 
-    history.append({"role": "user", "parts": [user_input]})
-    history.append({"role": "model", "parts": [formatted_response]})
-
-    return jsonify({"response": formatted_response})
+        return jsonify({"response": formatted_response})
+    except Exception as e:
+        print(f"Error in chat endpoint: {str(e)}")
+        return jsonify({"error": "An error occurred while processing your request. Please try again."}), 500
 
 # This is required for Vercel
 if __name__ == "__main__":
