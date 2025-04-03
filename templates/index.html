@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Chef Bot</title>
+    <!-- Update favicon to use emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍴</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-utensils"></i> Recipe Chef
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="home-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="about-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="theme-link">
+                            <i class="fas fa-moon" id="nav-theme-toggle"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <div class="animated-background">
+            <div class="food-icon"><i class="fas fa-pizza-slice"></i></div>
+            <div class="food-icon"><i class="fas fa-hamburger"></i></div>
+            <div class="food-icon"><i class="fas fa-apple-alt"></i></div>
+            <div class="food-icon"><i class="fas fa-carrot"></i></div>
+            <div class="food-icon"><i class="fas fa-egg"></i></div>
+            <div class="food-icon"><i class="fas fa-bread-slice"></i></div>
+            <div class="food-icon"><i class="fas fa-cheese"></i></div>
+            <div class="food-icon"><i class="fas fa-ice-cream"></i></div>
+            <div class="food-icon"><i class="fas fa-cookie"></i></div>
+            <div class="food-icon"><i class="fas fa-drumstick-bite"></i></div>
+            <div class="food-icon"><i class="fas fa-fish"></i></div>
+            <div class="food-icon"><i class="fas fa-bacon"></i></div>
+            <div class="food-icon"><i class="fas fa-hotdog"></i></div>
+            <div class="food-icon"><i class="fas fa-pepper-hot"></i></div>
+            <div class="food-icon"><i class="fas fa-lemon"></i></div>
+            <div class="food-icon"><i class="fas fa-coffee"></i></div>
+            <div class="food-icon"><i class="fas fa-wine-glass-alt"></i></div>
+            <div class="food-icon"><i class="fas fa-candy-cane"></i></div>
+        </div>
+        
+        <!-- Chat Container -->
+        <div class="chat-container" id="chat-section">
+            <div class="chat-header">
+                <div class="chef-avatar">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h1>Recipe Chef</h1>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon" id="theme-toggle-btn"></i>
+                </div>
+            </div>
+            
+            <div id="chat-box">
+                <div id="messages">
+                    <div class="message chef-message animate-in">
+                        <div class="message-content">
+                            <p>Hello! I'm your Recipe Chef. Ask me about any recipes or cooking tips!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Ask about a recipe...">
+                <button id="send-btn" class="pulse">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- About Section -->
+        <div class="about-container" id="about-section">
+            <div class="about-header">
+                <h1>About Recipe Chef</h1>
+                <p class="tagline">Your AI-powered culinary assistant</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Recipe Chef uses advanced AI to provide you with personalized recipe recommendations and cooking advice.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Culinary Expertise</h3>
+                    <p>Access a vast database of recipes from around the world, with detailed instructions and ingredient lists.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Dietary Options</h3>
+                    <p>Get recipes tailored to your dietary preferences, whether you're vegan, gluten-free, or have other requirements.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Cooking Help</h3>
+                    <p>Ask any cooking-related questions and get expert advice on techniques, substitutions, and more.</p>
+                </div>
+            </div>
+            
+            <div class="about-footer">
+                <button class="btn-try-now" id="try-now-btn">Try Recipe Chef Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-utensils"></i>
+                    <span>Recipe Chef</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#" id="footer-home">Home</a>
+                    <a href="#" id="footer-about">About</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/devesh-vispute-986783250/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/deveshh_vispute?igsh=bnl0OXBlNXIzNHBv"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/devesh1454"><i class="fab fa-github"></i></a>
+                    <a href="mailto:visputedevesh14@gmail.com"><i class="fas fa-envelope"></i></a>
+
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Recipe Chef. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initially hide the about section
+            $("#about-section").hide();
+            
+            // Navigation functionality
+            $("#about-link, #footer-about").click(function(e) {
+                e.preventDefault();
+                $("#chat-section").fadeOut(300, function() {
+                    $("#about-section").fadeIn(300);
+                });
+                $("#home-link").removeClass("active");
+                $("#about-link").addClass("active");
+            });
+            
+            $("#home-link, #footer-home, #try-now-btn").click(function(e) {
+                e.preventDefault();
+                $("#about-section").fadeOut(300, function() {
+                    $("#chat-section").fadeIn(300);
+                });
+                $("#about-link").removeClass("active");
+                $("#home-link").addClass("active");
+            });
+            
+            // Theme toggle functionality - sync both toggles
+            $("#theme-toggle-btn, #nav-theme-toggle").click(function() {
+                $("body").toggleClass("dark-mode");
+                $(".fa-moon").toggleClass("fa-moon fa-sun");
+                $(".fa-sun").toggleClass("fa-sun fa-moon");
+            });
+            
+            $("#send-btn").click(function() {
+                const userInput = $("#user-input").val();
+                if (userInput.trim() !== "") {
+                    const userMessage = $(`
+                        <div class="message user-message">
+                            <div class="message-content">
+                                <p>${userInput}</p>
+                            </div>
+                        </div>
+                    `).hide();
+                    
+                    $("#messages").append(userMessage);
+                    userMessage.slideDown(300);
+                    $("#user-input").val("");
+                    
+                    // Show typing indicator
+                    const typingIndicator = $(`
+                        <div class="message chef-message typing-indicator" id="typing-indicator">
+                            <div class="message-content">
+                                <div class="typing-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    `).hide();
+                    
+                    $("#messages").append(typingIndicator);
+                    typingIndicator.fadeIn(300);
+                    
+                    $("#chat-box").animate({
+                        scrollTop: $("#chat-box")[0].scrollHeight
+                    }, 300);
+
+                    $.ajax({
+                        url: "/chat",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({ message: userInput }),
+                        success: function(response) {
+                            // Remove typing indicator
+                            typingIndicator.fadeOut(200, function() {
+                                $(this).remove();
+                                
+                                const chefMessage = $(`
+                                    <div class="message chef-message">
+                                        <div class="message-content markdown-content">
+                                            ${response.response}
+                                        </div>
+                                    </div>
+                                `).hide();
+                                
+                                $("#messages").append(chefMessage);
+                                chefMessage.slideDown(300);
+                                
+                                // Apply syntax highlighting to code blocks
+                                chefMessage.find('pre code').each(function(i, block) {
+                                    hljs.highlightElement(block);
+                                });
+                                
+                                $("#chat-box").animate({
+                                    scrollTop: $("#chat-box")[0].scrollHeight
+                                }, 300);
+                            });
+                        },
+                        error: function(error) {
+                            typingIndicator.fadeOut(200, function() {
+                                $(this).remove();
+                                
+                                const errorMessage = $(`
+                                    <div class="message chef-message error">
+                                        <div class="message-content">
+                                            <p>Sorry, I'm having trouble right now. Please try again later.</p>
+                                        </div>
+                                    </div>
+                                `).hide();
+                                
+                                $("#messages").append(errorMessage);
+                                errorMessage.slideDown(300);
+                                
+                                $("#chat-box").animate({
+                                    scrollTop: $("#chat-box")[0].scrollHeight
+                                }, 300);
+                            });
+                            console.error(error);
+                        }
+                    });
+                }
+            });
+
+            $("#user-input").keypress(function(e) {
+                if (e.which === 13) {
+                    $("#send-btn").click();
+                }
+            });
+            
+            // Focus input on page load
+            $("#user-input").focus();
+            
+            // Animate food icons in background
+            animateFoodIcons();
+        });
+        
+        function animateFoodIcons() {
+            const icons = document.querySelectorAll('.food-icon');
+            
+            icons.forEach(icon => {
+                // Set random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                icon.style.left = `${posX}%`;
+                icon.style.top = `${posY}%`;
+                
+                // Set random animation duration
+                const duration = 15 + Math.random() * 30;
+                icon.style.animationDuration = `${duration}s`;
+                
+                // Set random delay
+                const delay = Math.random() * 15;
+                icon.style.animationDelay = `${delay}s`;
+                
+                // Set random size
+                const size = 20 + Math.random() * 30;
+                icon.style.fontSize = `${size}px`;
+            });
+        }
+    </script>
+</body>
+</html>
